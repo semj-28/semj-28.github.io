@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const formData = new FormData(form);
 
             // 1. Send data to your Google Sheet API
-            fetch("https://script.google.com/a/macros/google.com/s/AKfycbxejGnHZaBycFIZR-xQ9kLji59vYbA3Ee5gyybSzIWf02iYDT3gKBZ_KCKDDCAuYW1a1w/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbxZJ3B9G-IYshdNowiHkxAO6sF0YS8_tNaHxa22ZITdfcpPdpOUI2jkTnRIooDs3DjE/exec", {
                 method: "POST",
                 body: formData
             })
