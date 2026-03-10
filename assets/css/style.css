@@ -1,0 +1,222 @@
+:root {
+    /* --- The Coolors Palette --- */
+    --olive-wood: #7a6c5d;
+    --charcoal-blue: #2a3d45;
+    --pale-oak: #ddc9b4;
+    --khaki-beige: #bcac9b;
+    --dusty-rose: #c17c74;
+
+    /* --- Functional Assignments --- */
+    --primary: var(--dusty-rose);
+    --secondary: var(--olive-wood);
+    --bg-dark: var(--charcoal-blue);
+    
+    /* Tweaking the glass effect to match the warmer tones */
+    --glass: rgba(221, 201, 180, 0.05); /* Tinted with Pale Oak */
+    --border: rgba(221, 201, 180, 0.15);
+    --linkedin: #0077b5;
+    
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+}
+
+html {
+    background-color: var(--bg-dark);
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: 'Inter', system-ui, sans-serif;
+    color: #ffffff; /* Keeping headings crisp white */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Updated background with Dusty Rose mouse glow */
+    background: 
+        radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(193, 124, 116, 0.2) 0%, transparent 40%),
+        radial-gradient(circle at center, #354a54 0%, var(--bg-dark) 100%);
+    background-attachment: fixed;
+}
+
+/* --- NAVIGATION --- */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 40px; /* Added 40px horizontal padding to keep things off the edges */
+    box-sizing: border-box; /* Ensures the padding doesn't make the bar wider than the screen */
+    background: rgba(42, 61, 69, 0.85); 
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between; /* The magic trick: Logo left, Links right */
+    align-items: center; /* Keeps everything vertically centered */
+    z-index: 100;
+}
+
+/* The new logo styling */
+.logo {
+    color: var(--pale-oak); /* Default color is Pale Oak */
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-decoration: none;
+    letter-spacing: -1.5px;
+    transition: transform 0.3s ease; /* For a subtle hover effect */
+}
+
+/* Let's style the "semj" and the "28" differently with a clever CSS trick */
+.logo-first {
+    color: var(--dusty-rose);
+    transition: color 0.4s ease; /* Tells it to fade smoothly over 0.4 seconds */
+}
+
+.logo-second {
+    color: var(--olive-wood);
+    transition: color 0.4s ease;
+}
+
+/* When the parent .logo is hovered, change the first part to Olive Wood */
+.logo:hover .logo-first {
+    color: var(--olive-wood);
+}
+
+/* When the parent .logo is hovered, change the second part to Dusty Rose */
+.logo:hover .logo-second {
+    color: var(--dusty-rose);
+}
+
+.logo:hover {
+    transform: scale(1.05);
+    text-shadow: 0 0 10px rgba(193, 124, 116, 0.3); /* Slightly softened the glow */
+}
+
+/* Updated selector to target the links inside the new container */
+.nav-links a {
+    color: var(--khaki-beige);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: color 0.3s, text-shadow 0.3s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--pale-oak);
+    text-shadow: 0 0 10px rgba(193, 124, 116, 0.5); 
+}
+
+/* --- CARDS & LAYOUT --- */
+.card {
+    background: var(--glass);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid var(--border);
+    border-radius: 28px;
+    padding: 40px;
+    width: 90%;
+    max-width: 420px; /* Keeping it slightly wider for the form */
+    text-align: center;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    margin: 100px 0 40px 0;
+    z-index: 10;
+}
+
+/* Added specific width constraint for the About page so it reads well */
+.card-about {
+    max-width: 500px;
+    text-align: left;
+}
+
+.profile-pic { 
+    width: 110px; 
+    height: 110px; 
+    border-radius: 50%; 
+    border: 2px solid var(--border); 
+    margin-bottom: 20px; 
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3); 
+}
+
+/* --- TYPOGRAPHY --- */
+h1 { margin: 0 0 16px; font-size: 1.8rem; font-weight: 700; letter-spacing: -0.5px; }
+h2 { color: var(--primary); font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px;}
+p { color: var(--pale-oak); margin-bottom: 30px; font-size: 0.95rem; line-height: 1.6; }
+
+.highlight {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+ul {
+    color: var(--pale-oak); 
+    font-size: 0.95rem; 
+    line-height: 1.6; 
+    margin-bottom: 24px;
+}
+
+/* --- FORMS --- */
+.form-group { text-align: left; margin-bottom: 18px; }
+label { display: block; font-size: 0.75rem; color: var(--khaki-beige); margin-bottom: 6px; font-weight: 600; text-transform: uppercase; }
+
+input, textarea { 
+    width: 100%; 
+    padding: 14px; 
+    background: rgba(0,0,0,0.2); 
+    border: 1px solid var(--border); 
+    border-radius: 12px; 
+    color: #ffffff; 
+    box-sizing: border-box; 
+    font-size: 1rem; 
+    transition: 0.3s; 
+}
+
+input:focus, textarea:focus { 
+    outline: none; 
+    border-color: var(--primary); 
+    background: rgba(0,0,0,0.3); 
+}
+
+/* --- BUTTONS --- */
+.btn-submit { 
+    width: 100%; 
+    padding: 16px; 
+    background: linear-gradient(135deg, var(--dusty-rose), var(--olive-wood)); 
+    border: none; 
+    border-radius: 12px; 
+    color: white; 
+    font-weight: 600; 
+    cursor: pointer; 
+    transition: 0.2s; 
+}
+
+.btn-submit:hover { 
+    transform: translateY(-2px); 
+    box-shadow: 0 12px 24px -6px var(--dusty-rose); 
+}
+
+.btn-linkedin { 
+    display: inline-flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 8px; 
+    margin-top: 30px; 
+    padding: 12px 24px; 
+    background: rgba(255,255,255,0.05); 
+    border: 1px solid var(--border); 
+    border-radius: 100px; 
+    text-decoration: none; 
+    color: var(--pale-oak); 
+    font-size: 0.85rem; 
+    transition: 0.3s; 
+}
+
+.btn-linkedin:hover { 
+    background: var(--linkedin); 
+    border-color: var(--linkedin); 
+    color: white; 
+}
+
+.linkedin-icon { width: 18px; height: 18px; }

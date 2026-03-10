@@ -13,90 +13,7 @@
     })(window,document,'script','dataLayer','GTM-KTP58SJ');</script>
     <!-- End Google Tag Manager -->
 
-    <style>
-        :root {
-            --primary: #6366f1;
-            --secondary: #a855f7;
-            --glass: rgba(255, 255, 255, 0.03);
-            --border: rgba(255, 255, 255, 0.08);
-            --bg-dark: #0f172a;
-            --mouse-x: 50%;
-            --mouse-y: 50%;
-        }
-
-        html {
-            background-color: var(--bg-dark);
-            height: 100%;
-        }
-
-        body {
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            font-family: 'Inter', system-ui, sans-serif;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: 
-                radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(99, 102, 241, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%);
-            background-attachment: fixed;
-        }
-
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            padding: 20px 0;
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            border-bottom: 1px solid var(--border);
-            display: flex;
-            justify-content: center;
-            gap: 40px;
-            z-index: 100;
-        }
-
-        nav a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.95rem;
-            transition: color 0.3s, text-shadow 0.3s;
-        }
-
-        nav a:hover, nav a.active {
-            color: white;
-            text-shadow: 0 0 10px rgba(99, 102, 241, 0.6);
-        }
-
-        .card {
-            background: var(--glass);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border: 1px solid var(--border);
-            border-radius: 28px;
-            padding: 40px;
-            width: 90%;
-            max-width: 500px;
-            text-align: left;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
-            margin: 100px 0 40px 0;
-            z-index: 10;
-        }
-
-        h1 { margin: 0 0 16px; font-size: 2rem; font-weight: 700; text-align: center;}
-        h2 { color: var(--primary); font-size: 1.1rem; margin-top: 24px; margin-bottom: 8px;}
-        p { color: #94a3b8; font-size: 0.95rem; line-height: 1.6; margin-bottom: 16px; }
-
-        .highlight {
-            color: white;
-            font-weight: 600;
-        }
-    </style>
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -104,12 +21,9 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <nav>
-        <a href="index.html">Connect</a>
-        <a href="about.html" class="active">About Me</a>
-    </nav>
+    <div id="nav-placeholder"></div>
 
-    <div class="card">
+    <div class="card card-about">
         <h1>About Sem</h1>
         <p>I am a <span class="highlight">Regional Product Lead in EMEA</span> at Google, specializing in advanced measurement solutions.</p>
         
@@ -132,5 +46,6 @@
             document.body.style.setProperty('--mouse-y', e.clientY + 'px');
         });
     </script>
+    <script src="assets/js/nav.js"></script>
 </body>
 </html>
