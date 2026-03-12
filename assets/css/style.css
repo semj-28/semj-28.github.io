@@ -251,3 +251,138 @@ input:focus, textarea:focus {
 .resource-card h2 {
     margin-top: 0;
 }
+
+/* --- RESOURCE HUB LAYOUT FIX --- */
+.hub-layout {
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow-y: auto; /* Allows scrolling if the page gets long */
+}
+
+/* --- AI CHATBOT BRANDING --- */
+/* --- AI CHATBOT BRANDING & TOGGLE --- */
+.chat-toggle-wrapper {
+    margin: 120px auto 20px auto; /* Pushes everything down below the nav bar */
+    text-align: center;
+    width: 90%;
+    max-width: 1000px;
+}
+
+#toggle-chat-btn {
+    background: linear-gradient(135deg, var(--dusty-rose), #a05e57);
+    color: white;
+    border: none;
+    padding: 14px 35px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: 0.3s;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+    font-family: 'Inter', sans-serif;
+}
+
+#toggle-chat-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 25px rgba(193, 124, 116, 0.4);
+}
+
+.chat-container {
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto 40px auto;
+    background: rgba(42, 61, 69, 0.7); 
+    border: 1px solid rgba(221, 201, 180, 0.2); 
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+    overflow: hidden;
+    
+    /* THE MAGIC HIDE TOGGLE */
+    display: none; 
+    flex-direction: column;
+}
+
+/* When Javascript adds this class, the box appears */
+.chat-container.active {
+    display: flex; 
+    animation: slideDown 0.4s ease forwards; /* Bonus: A smooth entry animation! */
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.chat-header {
+    background: rgba(0,0,0,0.3);
+    padding: 15px 25px;
+    border-bottom: 1px solid rgba(221, 201, 180, 0.1);
+}
+
+.chat-header h3 {
+    margin: 0;
+    color: var(--dusty-rose);
+    font-size: 1.2rem;
+}
+
+.chat-messages {
+    height: 250px;
+    padding: 20px 25px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.msg-ai {
+    background: rgba(122, 108, 93, 0.3); /* Olive Wood tint */
+    color: var(--pale-oak);
+    padding: 14px 18px;
+    border-radius: 0 15px 15px 15px;
+    align-self: flex-start;
+    max-width: 85%;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 15px 25px;
+    background: rgba(0,0,0,0.2);
+    border-top: 1px solid rgba(221, 201, 180, 0.1);
+}
+
+.chat-input-area input {
+    flex-grow: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+.chat-input-area input:focus {
+    outline: none;
+}
+
+.chat-input-area input::placeholder {
+    color: rgba(221, 201, 180, 0.5);
+}
+
+.chat-input-area button {
+    background: linear-gradient(135deg, var(--dusty-rose), #a05e57);
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.chat-input-area button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(193, 124, 116, 0.4);
+}

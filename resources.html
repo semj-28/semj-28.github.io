@@ -7,9 +7,26 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
-<body>
+<body class="hub-layout">
 
     <div id="nav-placeholder"></div>
+
+    <div class="chat-toggle-wrapper">
+        <button id="toggle-chat-btn">Ask Me Anything ⚡</button>
+    </div>
+
+    <div class="chat-container" id="ai-chat-box">
+        <div class="chat-header">
+            <h3>⚡ semj28. AI Assistant</h3>
+        </div>
+        <div class="chat-messages">
+            <div class="msg-ai">Hello! I am connected directly to Gemini 2.5 Flash via Cloudflare Edge Compute. Ask me anything!</div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" placeholder="Test the API connection...">
+            <button>Ask</button>
+        </div>
+    </div>
 
     <div class="hub-container">
         
@@ -41,5 +58,75 @@
     </div>
 
     <script src="assets/js/nav.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const PROXY_URL = "https://gemini-proxy.semj.workers.dev/"; 
+            
+            const askBtn = document.querySelector('.chat-input-area button');
+            const inputField = document.querySelector('.chat-input-area input');
+            const chatBox = document.querySelector('.chat-messages');
+
+            // --- NEW: THE TOGGLE LOGIC ---
+            const toggleBtn = document.getElementById('toggle-chat-btn');
+            const chatContainer = document.getElementById('ai-chat-box');
+
+            toggleBtn.addEventListener('click', () => {
+                chatContainer.classList.toggle('active');
+                
+                // Change the button text depending on if it's open or closed
+                if(chatContainer.classList.contains('active')) {
+                    toggleBtn.innerText = "Close Assistant ✖";
+                } else {
+                    toggleBtn.innerText = "Ask Me Anything ⚡";
+                }
+            });
+            // -----------------------------
+
+            async function sendMessage() {
+                const text = inputField.value.trim();
+                if (!text) return;
+
+                chatBox.innerHTML += `<div class="msg-ai" style="background: rgba(221, 201, 180, 0.15); align-self: flex-end; color: white;">${text}</div>`;
+                inputField.value = '';
+                
+                const loadingId = "loading-" + Date.now();
+                chatBox.innerHTML += `<div class="msg-ai" id="${loadingId}" style="opacity: 0.7;">Thinking... ⚡</div>`;
+                chatBox.scrollTop = chatBox.scrollHeight;
+
+                try {
+                    const response = await fetch(PROXY_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ message: text }) 
+                    });
+                    
+                    const data = await response.json();
+                    
+                    document.getElementById(loadingId).remove();
+                    
+                    if (data.reply) {
+                        const formattedReply = data.reply.replace(/\n/g, '<br>');
+                        chatBox.innerHTML += `<div class="msg-ai">${formattedReply}</div>`;
+                    } else {
+                        chatBox.innerHTML += `<div class="msg-ai" style="color: #ff6b6b;">Error: Unexpected response from AI.</div>`;
+                    }
+
+                } catch (error) {
+                    document.getElementById(loadingId).remove();
+                    chatBox.innerHTML += `<div class="msg-ai" style="color: #ff6b6b;">Network Error: Could not reach the proxy.</div>`;
+                    console.error(error);
+                }
+                
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }
+
+            askBtn.addEventListener('click', sendMessage);
+
+            inputField.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+        });
+    </script>
 </body>
 </html>
